@@ -1,4 +1,6 @@
 "use strict";
+//lesson04
+
 const workingHard = function (variable) {
   if (typeof variable !== "string") {
     return "В качестве аргумента передана не строка.";
