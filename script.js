@@ -1,16 +1,14 @@
 "use strict";
 
-let usersNum;
-
 function generateRandomNumber(min, max) {
   let randomNum = Math.ceil(Math.random() * (max - min + 1) + min);
   console.log(randomNum);
 
   function two() {
-    usersNum = +prompt("Guess a number from 1 - 100");
-    console.log(usersNum == null);
+    let usersNum = prompt("Guess a number from 1 - 100");
+    console.log(usersNum);
 
-    if (usersNum == null) {
+    if (usersNum === null) {
       alert("The game is over");
       return;
     }
@@ -20,6 +18,9 @@ function generateRandomNumber(min, max) {
       two();
     }
 
+    usersNum = +usersNum;
+
+    console.log(usersNum);
     if (usersNum > randomNum) {
       alert("The number you are guessing is smaller");
       two();
@@ -30,6 +31,10 @@ function generateRandomNumber(min, max) {
     }
     if (usersNum === randomNum) {
       alert("Congratulations! You've won!");
+      return;
+    }
+    if (usersNum !== randomNum) {
+      two();
     }
   }
   two();
