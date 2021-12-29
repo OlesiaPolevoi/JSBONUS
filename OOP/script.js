@@ -34,7 +34,6 @@ let elem1 = new DomElement("#best", 100, 200, "red", 36);
 
 const bodyElem = document.querySelector("body");
 
-//parentElem.addtoend(theElemweinserting.creaeElem())
 bodyElem.append(elem1.createElem());
 
 elem1.addText("some text");
