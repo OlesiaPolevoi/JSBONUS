@@ -7,40 +7,34 @@ const DomElement = function (selector, height, width, bg, fontSize) {
   this.bg = bg;
   this.fontSize = fontSize;
 
-  this.createElem = function (str) {
-    if (str[0] === ".") {
+  this.createElem = function () {
+    if (this.selector[0] === ".") {
       const newDiv = document.createElement("div");
-      console.log(newDiv);
-      newDiv.classList.add(str.slice(1));
+      newDiv.classList.add(this.selector.slice(1));
+      const cssText = `height: ${this.height}px;width: ${this.width}px;background-color: ${this.bg}`;
+      newDiv.style.cssText = cssText;
+      return newDiv;
     }
-    if (str[0] === "#") {
+    if (this.selector[0] === "#") {
       const newParagraph = document.createElement("p");
-      console.log(newParagraph);
-      newParagraph.setAttribute("id", str.slice(1));
+      newParagraph.setAttribute("id", this.selector.slice(1));
+      const cssTextFont = `font-size: ${this.fontSize}px`;
+      console.log(cssTextFont);
+      newParagraph.style.cssText = cssTextFont;
+      return newParagraph;
     }
+  };
+  this.addText = function (text) {
+    const elem = document.querySelector(this.selector);
+    elem.innerHTML = text;
   };
 };
 
-let elem1 = new DomElement(".block");
+let elem1 = new DomElement("#best", 100, 200, "red", 36);
 
-console.log(elem1);
+const bodyElem = document.querySelector("body");
 
-elem1.createElem(".block");
+//parentElem.addtoend(theElemweinserting.creaeElem())
+bodyElem.append(elem1.createElem());
 
-elem1.style.cssText = "color: red; font-size: 20px;";
-console.log(elem1);
-
-///* <p id="elem" style="background: red;"></p> */
-// let elem = document.querySelector("#elem");
-// elem.style.cssText = "color: red; font-size: 20px;";
-
-// let div = document.createElement("div");
-// div.className = "alert";
-// div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали важное сообщение.";
-// elem.classList.add/remove("class") – добавить/удалить класс.
-
-// содержит метод, который создает элемент на странице в зависимости от условия:
-// - если строка selector начинается с точки, создаем div с классом
-// - если строка selector начинается с решетки # то создаем параграф с id
-// пример:если передана строка '.block', то функция конструктор создает элемент с class="block"
-// если передана строка '#best', то функция конструктор создает элемент с id =best"
+elem1.addText("some text");
