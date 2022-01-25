@@ -1,16 +1,14 @@
 "use strict";
 
 const getData = () => {
-  return new Promise((resolve, reject) => {
-    fetch("db.json")
-      .then((response) => response.json())
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return fetch("db.json")
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 };
 
 const sendData = (data) => {
@@ -20,7 +18,11 @@ const sendData = (data) => {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-  });
+  })
+    .then(() => console.log("data is sent"))
+    .catch((err) => console.log(err));
 };
 
-getData().then((data) => sendData(data));
+getData()
+  .then((data) => sendData(data))
+  .catch((error) => console.log(error));
